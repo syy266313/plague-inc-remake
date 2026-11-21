@@ -5,6 +5,10 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <title>瘟疫公司 · 复刻版</title>
 <link rel="stylesheet" href="style.css">
+<style>
+#boot{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;
+  background:#070707;color:#9a8f88;font-size:13px;letter-spacing:.08em;z-index:20}
+</style>
 </head>
 <body>
 <div id="app">
@@ -22,6 +26,86 @@
       <button id="sp3" data-s="3">3×</button>
     </div>
   </div>
+
+  <div class="bars">
+    <div class="bar b1"><label>传染性<b id="vI">0</b></label><u><i id="pI"></i></u></div>
+    <div class="bar b2"><label>严重性<b id="vS">0</b></label><u><i id="pS"></i></u></div>
+    <div class="bar b3"><label>致死性<b id="vL">0</b></label><u><i id="pL"></i></u></div>
+  </div>
+
+  <div class="world">
+    <div class="wrow">
+      <span id="wInfSpan">感染 <b id="wInf">0</b></span>
+      <span id="wDeadSpan">死亡 <b id="wDead">0</b></span>
+      <span id="wCtrySpan">国家 <b id="wCtry">0/175</b></span>
+      <span style="flex:1"></span>
+      <span id="wPop">世界 76.1 亿</span>
+    </div>
+    <div class="cure">
+      <span>解药</span><u><i id="cureBar"></i></u><b id="curePct">0%</b>
+    </div>
+  </div>
+
+  <div class="mapwrap" id="mapwrap">
+    <canvas id="map"></canvas>
+    <div class="mapbar">
+      <span>全球感染 <b id="mapInf">0.0%</b></span>
+      <span class="spacer"></span>
+      <span class="legend"><i class="l0"></i>未感染<i class="l1"></i>感染<i class="l2"></i>死亡</span>
+    </div>
+    <div class="frame"></div>
+    <div class="flash" id="flash" style="display:none">
+      <div class="fbar"><span>● 突发新闻</span><em id="fTag">BBC</em></div>
+      <div class="fbody"><b id="fTitle"></b><p id="fBody"></p></div>
+    </div>
+    <div id="bubbles"></div>
+    <div class="cinfo" id="cinfo" style="display:none"></div>
+  </div>
+
+  <div class="news" id="newsTxt">世界卫生组织正在密切监测全球疫情…</div>
+
+  <div class="panel">
+    <div class="tabs">
+      <button data-cat="tra" class="on"><i>☣</i>传播</button>
+      <button data-cat="sym"><i>☠</i>症状</button>
+      <button data-cat="abi"><i>⬢</i>能力</button>
+      <button data-cat="data"><i>▤</i>数据</button>
+    </div>
+    <div class="grid" id="grid"></div>
+    <div class="dataview" id="dataview" style="display:none">
+      <div class="drow"><span>病原体</span><b id="dPatho">细菌</b></div>
+      <div class="drow"><span>存活天数</span><b id="dDay">0</b></div>
+      <div class="drow"><span>已感染</span><b id="dInf">0</b></div>
+      <div class="drow"><span>已死亡</span><b id="dDead">0</b></div>
+      <div class="drow"><span>感染国家</span><b id="dCtry">0</b></div>
+      <div class="drow"><span>解药进度</span><b id="dCure">未启动</b></div>
+      <div class="drow"><span>解药速度</span><b id="dCureRate">—</b></div>
+      <div class="drow"><span>感染率</span><b id="dShare">0.0%</b></div>
+      <div class="dnote" id="dNote">把病毒铺满全世界，赶在解药之前。</div>
+    </div>
+  </div>
+
+  <div class="overlay" id="startScreen">
+    <h1>瘟 疫 公 司</h1>
+    <div class="sub">PLAGUE INC · REMAKE</div>
+    <div class="cards" id="pathoCards"></div>
+    <div class="diffs" id="diffRow">
+      <button data-d="easy">简单</button><button data-d="normal" class="on">普通</button><button data-d="hard">困难</button>
+    </div>
+    <button class="btn" id="btnPick" disabled>选择起始国家</button>
+    <div class="tip">先选病原体，再在地图上点一个国家投放零号病人。</div>
+  </div>
+
+  <div class="overlay" id="endScreen" style="display:none">
+    <h1 id="endTitle" class="win">人类灭绝</h1>
+    <div class="sub" id="endSub">HUMANITY EXTINCT</div>
+    <div class="endstats" id="endStats"></div>
+    <button class="btn" id="btnAgain">再来一局</button>
+  </div>
 </div>
+
+
+<div id="boot">正在生成世界地图…</div>
+<script src="data.js"></script>
 </body>
 </html>
